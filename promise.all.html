@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const posts = [
+            {
+                title: "Post One",
+                body: "this is post one",
+                createAt: new Date().getTime(),
+            },
+            {
+                title: "Post Two",
+                body: "this is post two",
+                createAt: new Date().getTime(),
+            },
+        ];
+        let intervalid = 0;
+        function getpost() {
+            // clearInterval(intervalid)
+            // intervalid=setInterval(()=>{
+            setTimeout(() => {
+                let output = "";
+                for (let i = 0; i < posts.length; i++) {
+                    output += `<li>${posts[i].title}--${posts[i].body
+                        }--${new Date()}--second age</li>`;
+                    // output+=`<li>${posts[i].title}--${posts[i].body}--${(new Date().getTime()-posts[i].createAt)/1000}--second age</li>`
+                }
+                document.body.innerHTML = output;
+            }, 1000);
+            // },1000)
+        }
+        const createpost = (post) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let error = false;
+                    if (!error) {
+                        resolve(posts.push({ ...post, createAt: new Date().getTime() }));
+                    } else {
+                        reject("Error:Something went worng");
+                    }
+                }, 1000);
+            });
+
+        function deletepost() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (posts.length > 0) {
+                        resolve(posts.pop());
+                    } else {
+                        reject("Error: Arrat is empty");
+                    }
+                }, 2000);
+            });
+        }
+        // createpost({title:'Post Three',body:'this is post three'})
+        // .then(getpost)
+        // .then(()=>{
+        //     getpost()
+        //     deletepost().then(()=>{
+        //         getpost()
+        //         deletepost().then(()=>{
+        //             getpost()
+        //             deletepost().then(()=>{
+        //                 getpost()
+        //                 deletepost().then()
+        //                 .catch((err)=>{console.log(err)})
+        //             })
+        //             .catch((err)=>{console.log(err)})
+        //         })
+        //         .catch((err)=>{console.log(err)})
+        //     })
+        //     .catch((err)=>{console.log(err)})
+        // })
+        // .catch((err)=>{console.log(err)})
+
+        const create4thpost = (post) =>
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let error = false;
+                    if (!error) {
+                        resolve(posts.push({ ...post, createAt: new Date().getTime() }));
+
+                    } else {
+                        reject("Error:Something went worng");
+                    }
+                }, 3000);
+            });
+
+        // create4thpost({title:'Post Four',body:'this is post four'}  )
+        // .then(getpost)
+        // .catch(err=>console.log(err))
+        // .then(()=>{
+        //     getpost
+        //     // deletepost().then()
+        //     // .catch((err)=>{console.log(err)})
+        // })
+        // .catch((err)=>{console.log(err)})
+
+        function userLastUpdateTime() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let error = false;
+                    let date
+                    if (!error) {
+
+                        resolve(date);
+                    } else {
+                        reject("Error:Something went worng");
+                    }
+                }, 1000);
+            });
+        }
+        Promise.all([
+            createpost({ title: "Post Three", body: "this is post three" }),
+            create4thpost({ title: "Post Four", body: "this is post four" }),
+            userLastUpdateTime(),
+        ]).then(([createpost, create4thpost, date]) => {
+            getpost()
+            console.log(date = new Date());
+        })
+        .catch(err=>console.log(err));
+    </script>
+</body>
+
+</html>
