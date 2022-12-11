@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const posts = [
+      {
+        title: "Post One",
+        body: "This is post one",
+        createAt: new Date().getTime(),
+      },
+      {
+        title: "Post Two",
+        body: "This is post two",
+        createAt: new Date().getTime(),
+      },
+    ];
+
+    let intervalid = 0;
+    function getpost() {
+      clearInterval(intervalid);
+      intervalid = setInterval(() => {
+        let output = "";
+        for (let i = 0; i < posts.length; i++) {
+          output += `<li>${posts[i].title}-${posts[i].body}--${(new Date().getTime() - posts[i].createAt) / 1000
+            }`;
+        }
+        document.body.innerHTML = output;
+      }, 1000);
+    }
+
+ 
+ async function createpost(post) {
+   const post3=   new Promise((resolve, reject) => {
+      setTimeout(()=>{
+          let error=false
+          if(!error){
+            resolve(posts.push({...post,createAt:new Date().getTime()}))
+          }else{
+            reject('Error:Something went worng')
+          }
+        },5000)
+       });
+       let create
+       try{
+        create=await post3
+       }catch(err){
+        console.log(err)
+       }
+
+    }
+
+    createpost({title:'Post Three',body:'This is post three'})
+    .then(()=>{
+    getpost()
+    deletepost().then(()=>{
+        getpost()
+        deletepost().then(()=>{
+            getpost()
+            deletepost().then(()=>{
+                getpost()
+                deletepost().then(()=>{
+                  getpost()
+                  deletepost().then()
+                  .catch((err)=>{console.log(err)})
+                })
+                .catch((err)=>{console.log(err)})
+            })
+            .catch((err)=>{console.log(err)})
+        })
+        .catch((err)=>{console.log(err)})
+    })
+    .catch((err)=>{console.log(err)})
+})
+.catch((err)=>{console.log(err)})
+
+  async function  deletepost(){
+        const delet= new Promise((resolve,reject)=>{
+          setTimeout(()=>{
+            if(posts.length>0){
+              resolve(posts.pop());
+            }else{
+              reject('Error:Array is empty')
+            }
+          },2000)
+        })
+        let dele
+        try{
+          dele= await delet
+        
+        }catch(err){
+          console.log(err)
+        }
+      }
+   
+      async function createpost4(post) {
+        const post4= new Promise((resolve, reject) => {
+          setTimeout(()=>{
+            let error=false
+            if(!error){
+              resolve(posts.push({...post,createAt:new Date().getTime()}))
+            }else{
+              reject('Error:Something went worng')
+            }
+          },1000)
+        });
+       let create4
+        try{
+          create4=await post4
+        }catch(err){
+          console.log(err)
+        }
+      }
+      createpost4({title:'Post Four',body:'This is post four'})
+      .then(getpost)
+  </script>
+
+  <script>
+
+
+  // async await----  
+
+  
+    function Buycar(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          let error=false
+          if(!error)
+          resolve('Buy a Car')
+          else{
+            reject('Error:Not buy a Car')
+          }
+        },10000)
+  
+      })
+    }
+
+    function planatrip(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          let error= false
+          if(!error){
+            resolve('lets go to Manali')
+          }else(
+            reject('Error:Manali trip is cancel')
+          )
+         
+        },2000)
+  
+      })
+    }
+
+    function reachmanali(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          let error=false
+          if(!error){
+            resolve('reached manali')
+          }else{
+            reject('Error:Manali trip is cancel')
+          }
+        },1000)
+  
+      })
+    }
+
+    function gotofamousmountain(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          let error=false
+          if(!error){
+            resolve('reached mountain')
+          }else{
+            reject('Error:fuel empty')
+          }
+        },6000)
+      })
+    }
+  
+    function gotomarket(){
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          let error=false
+          if(!error){
+            resolve('going to market')
+          }else{
+            reject('Error:Some urgent work')
+          }
+        },5000)
+  
+      })
+    }
+    async function fun(){
+      try{
+      const msg=await Buycar();
+      console.log(msg);
+      const msg2=await planatrip();
+      console.log(msg2);
+      const msg3=await reachmanali();
+      console.log(msg3);
+      const msg4=await gotofamousmountain()
+      console.log(msg4);
+      const msg5=await gotomarket()
+      console.log(msg5);
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fun()
+  </script>
+</body>
+
+</html>
+
